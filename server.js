@@ -34,6 +34,11 @@ app.post('/submit', (req, res) => {
   res.status(200).send('Data berhasil disimpan');
 });
 
+// Tambahkan ini
+app.get('/', (req, res) => {
+  res.send('Server Node.js aktif dan bisa diakses publik!');
+});
+
 app.listen(3000, '0.0.0.0', () => {
   console.log('Server running on port 3000');
 });
