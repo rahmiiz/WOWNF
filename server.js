@@ -4,9 +4,10 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Middleware JSON
 app.use(express.json());
 
-// CORS (biar bisa fetch dari file HTML yang dibuka langsung)
+// CORS (biar bisa fetch dari mana aja)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST");
@@ -14,6 +15,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve file statis dari folder public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Endpoint POST /submit
 app.post('/submit', (req, res) => {
   const data = req.body;
 
@@ -34,11 +39,11 @@ app.post('/submit', (req, res) => {
   res.status(200).send('Data berhasil disimpan');
 });
 
-// Tambahkan ini
+// Mulai server
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${port}`);
 app.get('/', (req, res) => {
-  res.send('Server Node.js aktif dan bisa diakses publik!');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Server running on port 3000');
 });
