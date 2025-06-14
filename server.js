@@ -34,6 +34,6 @@ app.post('/submit', (req, res) => {
   res.status(200).send('Data berhasil disimpan');
 });
 
-app.listen(port, () => {
-  console.log(`Server berjalan di http://localhost:${port}`);
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Server running on port 3000');
 });
